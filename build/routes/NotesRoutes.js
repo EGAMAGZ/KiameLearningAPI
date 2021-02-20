@@ -28,8 +28,7 @@ class NotesRoutes {
             let newNote = new Notes_1.default({ title, content, creator });
             yield newNote.save();
             res.status(200).json({
-                data: { _id: newNote._id
-                },
+                data: { _id: newNote._id },
                 message: "Note created and saved"
             });
         });

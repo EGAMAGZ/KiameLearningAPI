@@ -23,8 +23,7 @@ class NotesRoutes{
         
 
         res.status(200).json({
-            data: {_id:newNote._id
-            },
+            data: {_id:newNote._id},
             message: "Note created and saved"
         });
     }

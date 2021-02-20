@@ -10,6 +10,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const compression_1 = __importDefault(require("compression"));
 const cors_1 = __importDefault(require("cors"));
 const IndexRoutes_1 = __importDefault(require("./routes/IndexRoutes"));
+const UserRoutes_1 = __importDefault(require("./routes/UserRoutes"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -17,7 +18,7 @@ class Server {
         this.routes();
     }
     config() {
-        const MONGO_URI = 'mongodb://localhost/restapit';
+        const MONGO_URI = 'mongodb://localhost/kiamedb';
         mongoose_1.default.set('useFindAndModify', true);
         mongoose_1.default.connect(MONGO_URI || process.env.MONGODB_URL, {
             useNewUrlParser: true,
@@ -34,6 +35,7 @@ class Server {
     }
     routes() {
         this.app.use(IndexRoutes_1.default);
+        this.app.use('/api/users', UserRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

@@ -6,6 +6,7 @@ import compression from 'compression';
 import cors from 'cors';
 
 import IndexRoutes  from './routes/IndexRoutes';
+import UserRoutes from './routes/UserRoutes';
 
 class Server {
 
@@ -39,6 +40,7 @@ class Server {
 
     routes(){
         this.app.use(IndexRoutes);
+        this.app.use('/api/users', UserRoutes);
     }
 
     start(){

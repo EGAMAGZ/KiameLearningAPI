@@ -19,7 +19,7 @@ class Server {
     }
 
     config() {
-        const MONGO_URI = 'mongodb://localhost/restapit';
+        const MONGO_URI = 'mongodb://localhost/kiamedb';
         mongoose.set('useFindAndModify', true);
         mongoose.connect(MONGO_URI || process.env.MONGODB_URL, {
             useNewUrlParser: true,

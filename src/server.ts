@@ -9,6 +9,7 @@ import IndexRoutes  from './routes/IndexRoutes';
 import UserRoutes from './routes/UserRoutes';
 import TeacherRoutes from './routes/TeacherRoutes';
 import GroupsRoutes from "./routes/GroupsRoutes";
+import NotesRoutes from "./routes/NotesRoutes";
 
 class Server {
 
@@ -45,6 +46,7 @@ class Server {
         this.app.use('/api/users', UserRoutes);
         this.app.use('/api/teachers', TeacherRoutes);
         this.app.use('/api/groups', GroupsRoutes);
+        this.app.use('/api/notes/', NotesRoutes);
     }
 
     start(){

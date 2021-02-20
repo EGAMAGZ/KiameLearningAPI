@@ -79,8 +79,31 @@ class UserRoutes{
         res.status(200).json({message: "User Succesfully deleted"});
     }
 
+    public async loginUser(req: Request, res: Response){
+        let {username, password} = req.body;
+
+        if(!username || !password){
+            return res.status(400).json({message: "Missing values for User"});
+        }
+
+        let user = await User.findOne({username, password});
+
+        if(user == null){
+            return res.status(200).json({
+                data: null,
+                message: "Invalid password or email"
+            });
+        }
+        
+        res.status(200).json({
+            data: user,
+            message: "Valid User"
+        });
+    }
+
     public routes(){
         this.router.post('/', this.createUser);
+        this.router.post('/login', this.loginUser);
         this.router.get('/:username', this.getUser);
         this.router.put('/:username', this.updateUser);
         this.router.delete('/:username', this.deleteUser);

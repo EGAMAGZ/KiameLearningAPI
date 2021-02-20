@@ -27,14 +27,31 @@ class GroupsRoutes{
         });
     }
 
+    public async getGroupList(req: Request, res: Response){
+        let userId = req.params.userId;
+
+        if(!userId){
+            return res.status(400).json({message: "Missing values to search groups"});
+        }
+
+        let groups = await Groups.find({students: userId})
+            .populate('owner', 'name -_id').select('title description owner');
+
+        res.status(200).json({
+            data: groups,
+            message: "Succesfully found list of groups"
+        })
+    }
+
     public async getGroup(req: Request, res: Response){
         let groupId = req.params.groupId;
 
         if(!groupId){
-            return res.status(400).json({message: "Missing values to search groups"});
+            return res.status(400).json({message: "Missing values to search the group"});
         }
 
-        let group = await Groups.findOne({_id: groupId}).populate('owner', 'name -_id');
+        let group = await Groups.findOne({_id: groupId})
+        .populate('owner', 'name -_id').populate('students', 'name -_id');
 
         res.status(200).json({
             data: group,
@@ -77,6 +94,7 @@ class GroupsRoutes{
 
     routes(){
         this.router.post('/', this.createGroup);
+        this.router.get('/list/:userId', this.getGroupList)
         this.router.get('/:groupId', this.getGroup);
         this.router.put('/join/:groupId', this.joinGroup);
         this.router.get('/students/:groupId', this.getStudentList);

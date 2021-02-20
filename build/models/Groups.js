@@ -10,4 +10,4 @@ const GroupSchema = new mongoose_1.Schema({
             ref: 'User'
         }]
 });
-exports.default = mongoose_1.model('Groups', GroupSchema);
+exports.default = mongoose_1.model('Group', GroupSchema);

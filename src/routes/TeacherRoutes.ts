@@ -46,7 +46,7 @@ class TeacherRoutes{
     public async updateTeacher(req: Request, res: Response){
         let param_username = req.params.username;
         
-        let isTeacher = true
+        let isTeacher = true;
 
         if(!param_username){
             return res.status(400).json({message: "Missing parameters for User"});
